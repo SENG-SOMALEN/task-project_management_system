@@ -18,14 +18,12 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = $this->authService->register(
+        $result = $this->authService->register(
             $request->validated()
         );
 
         return response()->json(
-            new AuthResource([
-                'user' => $user,
-            ]),
+            new AuthResource($result),
             201
         );
     }

@@ -5,6 +5,7 @@ namespace Modules\User\App\Services;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Modules\User\App\Interfaces\UserRepositoryInterface;
+use Modules\User\App\Models\User;
 
 class AuthService
 {
@@ -14,12 +15,21 @@ class AuthService
 
     public function register(array $data)
     {
-        $data['password'] = Hash::make($data['password']);
+        $user = User::create([
+            'username' => $data['username'],
+            'gender'   => $data['gender'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role'     => $data['role'] ?? 'TeamMember',
+            'status'   => true,
+        ]);
 
-        $data['role'] = 'TeamMember';
-        $data['status'] = true;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
-        return $this->userRepository->create($data);
+        return [
+            'user'  => $user,
+            'token' => $token,
+        ];
     }
 
     public function login(string $email, string $password)
