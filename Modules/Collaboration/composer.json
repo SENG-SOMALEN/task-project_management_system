@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/collaboration",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Collaboration\\": "",
+            "Modules\\Collaboration\\App\\": "app/",
+            "Modules\\Collaboration\\Database\\Factories\\": "database/factories/",
+            "Modules\\Collaboration\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Collaboration\\Tests\\": "tests/"
+        }
+    }
+}
