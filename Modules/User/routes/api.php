@@ -37,9 +37,9 @@ Route::prefix('v1')->group(function () {
         // ------------------------------------------------
         // Admin Only Routes
         // ------------------------------------------------
-        Route::middleware('role:Admin')->group(function () {
+        //Route::middleware('role:Admin')->group(function () {
             Route::apiResource('users', UserController::class);
-        });
+        //});
 
     });
 });
