@@ -37,6 +37,7 @@ RUN composer install \
     --optimize-autoloader \
     --no-interaction \
     --prefer-dist
+    --ignore-platform-reqs
 
 # Set Laravel permissions
 RUN chown -R www-data:www-data /var/www/html/storage \
