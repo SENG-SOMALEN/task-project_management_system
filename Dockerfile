@@ -62,3 +62,6 @@ RUN sed -i '/<VirtualHost \*:80>/a \
 EXPOSE 80
 
 CMD sh -c "php artisan migrate --force && php artisan db:seed --force && apache2-foreground"
+
+# Run Migration, Clear Cache and Start Apache
+CMD sh -c "php artisan migrate --force && php artisan config:clear && php artisan cache:clear && apache2-foreground"
