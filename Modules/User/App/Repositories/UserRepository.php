@@ -9,7 +9,7 @@ class UserRepository implements UserRepositoryInterface {
     public function __construct(private User $user){}
     public function all()
     {
-        return $this->user->all();
+        return $this->user->paginate(5);
     }
     public function find(int $id)
     {
