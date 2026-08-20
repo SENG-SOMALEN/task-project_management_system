@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Modules\User\App\Http\Controllers\AuthController;
 use Modules\User\App\Http\Controllers\UserController;
@@ -48,4 +49,15 @@ Route::prefix('v1')->group(function () {
             'message' => 'API is working',
         ]);
     });
+
+    Route::get('/test-db', function () {
+    $start = microtime(true);
+
+    DB::select('SELECT 1');
+
+    return response()->json([
+        'message' => 'Database connected',
+        'time' => microtime(true) - $start,
+    ]);
+});
 });
