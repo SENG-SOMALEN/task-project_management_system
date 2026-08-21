@@ -4,8 +4,6 @@ namespace Modules\Dashboard\App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use Modules\Dashboard\App\Interfaces\DashboardRepositoryInterface;
-use Modules\Task\App\Models\Task;
-use Modules\User\App\Models\User;
 
 class DashboardRepository implements DashboardRepositoryInterface
 {
@@ -64,13 +62,14 @@ class DashboardRepository implements DashboardRepositoryInterface
         ];
     }
 
-    public function getOverdueTasks()
+    public function getOverdueTasks(): array
     {
         return DB::table('tasks')
             ->where('status', '!=', 'Completed')
             ->where('due_date', '<', now())
             ->orderBy('due_date', 'asc')
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     public function getRecentProjects(): array
