@@ -5,6 +5,7 @@ namespace Modules\Dashboard\App\Repositories;
 use Illuminate\Support\Facades\DB;
 use Modules\Dashboard\App\Interfaces\DashboardRepositoryInterface;
 use Modules\Task\App\Models\Task;
+use Modules\User\App\Models\User;
 
 class DashboardRepository implements DashboardRepositoryInterface
 {
@@ -69,5 +70,66 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->where('status', '!=', 'Completed')
             ->where('due_date', '<', now())
             ->get();
+    }
+
+    public function getRecentProjects(): array
+    {
+        return DB::table('projects')
+            ->select([
+                'project_id',
+                'name',
+                'status',
+                'created_at',
+            ])
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get()
+            ->toArray();
+    }
+
+    public function getUpcomingTasks(): array
+    {
+        return Task::query()
+            ->with([
+                'project:project_id,name',
+                'assignedUser:user_id,username',
+            ])
+            ->where('status', '!=', 'Completed')
+            ->whereDate('due_date', '>=', now()->toDateString())
+            ->orderBy('due_date', 'asc')
+            ->limit(5)
+            ->get()
+            ->toArray();
+    }
+
+    public function getRecentActivity(): array
+    {
+        return Task::query()
+            ->with([
+                'creator:user_id,username',
+                'project:project_id,name',
+                'assignedUser:user_id,username',
+            ])
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get()
+            ->map(function ($task) {
+                return [
+                    'type' => 'task',
+                    'action' => 'created',
+                    'task_id' => $task->task_id,
+                    'task_name' => $task->title,
+                    'project' => $task->project?->name,
+                    'created_by' => $task->creator?->username,
+                    'assigned_to' => $task->assignedUser?->username,
+                    'created_at' => $task->created_at,
+                ];
+            })
+            ->toArray();
+    }
+
+    public function getTotalUsers(): int
+    {
+        return User::query()->count();
     }
 }
