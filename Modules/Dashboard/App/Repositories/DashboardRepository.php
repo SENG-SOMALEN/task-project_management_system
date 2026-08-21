@@ -69,6 +69,7 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->where('due_date', '<', now())
             ->orderBy('due_date', 'asc')
             ->get()
+            ->map(fn($item) => (array) $item)
             ->toArray();
     }
 
@@ -84,6 +85,7 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get()
+            ->map(fn($item) => (array) $item)
             ->toArray();
     }
 
@@ -103,6 +105,7 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->orderBy('due_date', 'asc')
             ->limit(5)
             ->get()
+            ->map(fn($item) => (array) $item)
             ->toArray();
     }
 
@@ -139,15 +142,12 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->orderBy('tasks.created_at', 'desc')
             ->limit(10)
             ->get()
+            ->map(fn($item) => (array) $item)
             ->toArray();
     }
 
     public function getTotalUsers(): int
     {
-        $stats = DB::table('users')
-            ->selectRaw('COUNT(*) as total')
-            ->first();
-
-        return (int) ($stats->total ?? 0);
+        return (int) DB::table('users')->count();
     }
 }
