@@ -66,9 +66,10 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function getOverdueTasks()
     {
-        return Task::query()
+        return DB::table('tasks')
             ->where('status', '!=', 'Completed')
             ->where('due_date', '<', now())
+            ->orderBy('due_date', 'asc')
             ->get();
     }
 
@@ -89,10 +90,14 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function getUpcomingTasks(): array
     {
-        return Task::query()
-            ->with([
-                'project:project_id,name',
-                'assignedUser:user_id,username',
+        return DB::table('tasks')
+            ->select([
+                'task_id',
+                'title',
+                'status',
+                'due_date',
+                'project_id',
+                'assigned_to',
             ])
             ->where('status', '!=', 'Completed')
             ->whereDate('due_date', '>=', now()->toDateString())
@@ -104,32 +109,46 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function getRecentActivity(): array
     {
-        return Task::query()
-            ->with([
-                'creator:user_id,username',
-                'project:project_id,name',
-                'assignedUser:user_id,username',
+        return DB::table('tasks')
+            ->leftJoin(
+                'projects',
+                'tasks.project_id',
+                '=',
+                'projects.project_id'
+            )
+            ->leftJoin(
+                'users as creators',
+                'tasks.created_by',
+                '=',
+                'creators.user_id'
+            )
+            ->leftJoin(
+                'users as assigned_users',
+                'tasks.assigned_to',
+                '=',
+                'assigned_users.user_id'
+            )
+            ->select([
+                'tasks.task_id',
+                'tasks.title as task_name',
+                'tasks.status',
+                'tasks.created_at',
+                'projects.name as project_name',
+                'creators.username as created_by',
+                'assigned_users.username as assigned_to',
             ])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('tasks.created_at', 'desc')
             ->limit(10)
             ->get()
-            ->map(function ($task) {
-                return [
-                    'type' => 'task',
-                    'action' => 'created',
-                    'task_id' => $task->task_id,
-                    'task_name' => $task->title,
-                    'project' => $task->project?->name,
-                    'created_by' => $task->creator?->username,
-                    'assigned_to' => $task->assignedUser?->username,
-                    'created_at' => $task->created_at,
-                ];
-            })
             ->toArray();
     }
 
     public function getTotalUsers(): int
     {
-        return User::query()->count();
+        $stats = DB::table('users')
+            ->selectRaw('COUNT(*) as total')
+            ->first();
+
+        return (int) ($stats->total ?? 0);
     }
 }
