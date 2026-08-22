@@ -85,4 +85,13 @@ class TaskRepository implements TaskRepositoryInterface
 
         return $task;
     }
+
+    public function search(string $keyword)
+    {
+        $tasks = Task::where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('description', 'LIKE', "%{$keyword}%")
+                ->get();
+
+        return $tasks;
+    }
 }

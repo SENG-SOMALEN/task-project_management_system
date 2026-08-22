@@ -188,4 +188,9 @@ class TaskService
 
         return $task;
     }
+
+    public function searchTask(string $keyword)
+    {
+        return $this->taskRepository->search($keyword);
+    }
 }

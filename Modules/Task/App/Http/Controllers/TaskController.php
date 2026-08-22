@@ -18,9 +18,11 @@ class TaskController extends Controller
     /**
      * Display a listing of tasks.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = $this->taskService->getAllTasks();
+        $tasks = $this->taskService->searchTask(
+            $request->query('search')
+        );
 
         return TaskResource::collection($tasks);
     }
