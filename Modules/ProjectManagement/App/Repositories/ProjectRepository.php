@@ -39,7 +39,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     {
         return $this->project
                         ->when($keyword, function($query) use ($keyword) {
-                                $query->where('project_name', 'like', "%{$keyword}%");
+                                $query->whereRaw('LOWER(project_name) LIKE ?', ['%' . strtolower($keyword) . '%']);
                         })
                         ->when(!is_null($status), function($query) use ($status) {
                                 $query->where('status', $status);
