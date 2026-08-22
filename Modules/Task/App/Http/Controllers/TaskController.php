@@ -21,7 +21,8 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $tasks = $this->taskService->searchTask(
-            $request->query('search')
+            $request->query('search'),
+            $request->query('status')
         );
 
         return TaskResource::collection($tasks);

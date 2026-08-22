@@ -189,8 +189,8 @@ class TaskService
         return $task;
     }
 
-    public function searchTask(string $keyword)
+    public function searchTask(string $keyword, string $status)
     {
-        return $this->taskRepository->search($keyword);
+        return $this->taskRepository->search($keyword, $status);
     }
 }
