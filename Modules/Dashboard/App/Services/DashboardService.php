@@ -6,45 +6,47 @@ use Modules\Dashboard\App\Interfaces\DashboardRepositoryInterface;
 
 class DashboardService
 {
-    public function __construct(private DashboardRepositoryInterface $dashboardRepository){}
+    public function __construct(
+        private DashboardRepositoryInterface $dashboardRepository
+    ) {}
 
-    public function getProjectStatistics()
+    public function getProjectStatistics(): array
     {
         return $this->dashboardRepository->getProjectStatistics();
     }
 
-    public function getTaskStatistics()
+    public function getTaskStatistics(): array
     {
         return $this->dashboardRepository->getTaskStatistics();
     }
 
-    public function getCompletedVsPendingTasks()
+    public function getCompletedVsPendingTasks(): array
     {
         return $this->dashboardRepository->getCompletedVsPendingTasks();
     }
 
-    public function getOverdueTasks()
+    public function getOverdueTasks(): array
     {
         return $this->dashboardRepository->getOverdueTasks();
     }
 
-    // public function getRecentProjects()
-    // {
-    //     return $this->dashboardRepository->getRecentProjects();
-    // }
+    public function getRecentProjects(): array
+    {
+        return $this->dashboardRepository->getRecentProjects();
+    }
 
-    // public function getUpcomingTasks()
-    // {
-    //     return $this->dashboardRepository->getUpcomingTasks();
-    // }
+    public function getUpcomingTasks(): array
+    {
+        return $this->dashboardRepository->getUpcomingTasks();
+    }
 
-    // public function getRecentActivity()
-    // {
-    //     return $this->dashboardRepository->getRecentActivity();
-    // }
+    public function getRecentActivity(): array
+    {
+        return $this->dashboardRepository->getRecentActivity();
+    }
 
-    // public function getTotalUsers()
-    // {
-    //     return $this->dashboardRepository->getTotalUsers();
-    // }
+    public function getTotalUsers(): int
+    {
+        return $this->dashboardRepository->getTotalUsers();
+    }
 }

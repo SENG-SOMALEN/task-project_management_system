@@ -4,19 +4,19 @@ namespace Modules\Dashboard\App\Interfaces;
 
 interface DashboardRepositoryInterface
 {
-    public function getProjectStatistics();
+    public function getProjectStatistics(): array;
 
-    public function getTaskStatistics();
+    public function getTaskStatistics(): array;
 
-    public function getCompletedVsPendingTasks();
+    public function getCompletedVsPendingTasks(): array;
 
-    public function getOverdueTasks();
+    public function getOverdueTasks(): array;
 
-    // public function getRecentProjects();
+    public function getRecentProjects(): array;
 
-    // public function getUpcomingTasks();
+    public function getUpcomingTasks(): array;
 
-    // public function getRecentActivity();
+    public function getRecentActivity(): array;
 
-    // public function getTotalUsers();
+    public function getTotalUsers(): int;
 }
