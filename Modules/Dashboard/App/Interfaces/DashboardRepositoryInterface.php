@@ -12,11 +12,11 @@ interface DashboardRepositoryInterface
 
     public function getOverdueTasks();
 
-    public function getRecentProjects();
+    // public function getRecentProjects();
 
-    public function getUpcomingTasks();
+    // public function getUpcomingTasks();
 
-    public function getRecentActivity();
+    // public function getRecentActivity();
 
-    public function getTotalUsers();
+    // public function getTotalUsers();
 }

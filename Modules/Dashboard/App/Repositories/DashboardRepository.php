@@ -73,81 +73,81 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->toArray();
     }
 
-    public function getRecentProjects(): array
-    {
-        return DB::table('projects')
-            ->select([
-                'project_id',
-                'name',
-                'status',
-                'created_at',
-            ])
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get()
-            ->map(fn($item) => (array) $item)
-            ->toArray();
-    }
+    // public function getRecentProjects(): array
+    // {
+    //     return DB::table('projects')
+    //         ->select([
+    //             'project_id',
+    //             'name',
+    //             'status',
+    //             'created_at',
+    //         ])
+    //         ->orderBy('created_at', 'desc')
+    //         ->limit(5)
+    //         ->get()
+    //         ->map(fn($item) => (array) $item)
+    //         ->toArray();
+    // }
 
-    public function getUpcomingTasks(): array
-    {
-        return DB::table('tasks')
-            ->select([
-                'task_id',
-                'title',
-                'status',
-                'due_date',
-                'project_id',
-                'assigned_to',
-            ])
-            ->where('status', '!=', 'Completed')
-            ->whereDate('due_date', '>=', now()->toDateString())
-            ->orderBy('due_date', 'asc')
-            ->limit(5)
-            ->get()
-            ->map(fn($item) => (array) $item)
-            ->toArray();
-    }
+    // public function getUpcomingTasks(): array
+    // {
+    //     return DB::table('tasks')
+    //         ->select([
+    //             'task_id',
+    //             'title',
+    //             'status',
+    //             'due_date',
+    //             'project_id',
+    //             'assigned_to',
+    //         ])
+    //         ->where('status', '!=', 'Completed')
+    //         ->whereDate('due_date', '>=', now()->toDateString())
+    //         ->orderBy('due_date', 'asc')
+    //         ->limit(5)
+    //         ->get()
+    //         ->map(fn($item) => (array) $item)
+    //         ->toArray();
+    // }
 
-    public function getRecentActivity(): array
-    {
-        return DB::table('tasks')
-            ->leftJoin(
-                'projects',
-                'tasks.project_id',
-                '=',
-                'projects.project_id'
-            )
-            ->leftJoin(
-                'users as creators',
-                'tasks.created_by',
-                '=',
-                'creators.user_id'
-            )
-            ->leftJoin(
-                'users as assigned_users',
-                'tasks.assigned_to',
-                '=',
-                'assigned_users.user_id'
-            )
-            ->select([
-                'tasks.task_id',
-                'tasks.title as task_name',
-                'tasks.status',
-                'tasks.created_at',
-                'projects.name as project_name',
-                'creators.username as created_by',
-                'assigned_users.username as assigned_to',
-            ])
-            ->orderBy('tasks.created_at', 'desc')
-            ->limit(10)
-            ->get()
-            ->map(fn($item) => (array) $item)
-            ->toArray();
-    }
+    // public function getRecentActivity(): array
+    // {
+    //     return DB::table('tasks')
+    //         ->leftJoin(
+    //             'projects',
+    //             'tasks.project_id',
+    //             '=',
+    //             'projects.project_id'
+    //         )
+    //         ->leftJoin(
+    //             'users as creators',
+    //             'tasks.created_by',
+    //             '=',
+    //             'creators.user_id'
+    //         )
+    //         ->leftJoin(
+    //             'users as assigned_users',
+    //             'tasks.assigned_to',
+    //             '=',
+    //             'assigned_users.user_id'
+    //         )
+    //         ->select([
+    //             'tasks.task_id',
+    //             'tasks.title as task_name',
+    //             'tasks.status',
+    //             'tasks.created_at',
+    //             'projects.name as project_name',
+    //             'creators.username as created_by',
+    //             'assigned_users.username as assigned_to',
+    //         ])
+    //         ->orderBy('tasks.created_at', 'desc')
+    //         ->limit(10)
+    //         ->get()
+    //         ->map(fn($item) => (array) $item)
+    //         ->toArray();
+    // }
 
-    public function getTotalUsers(): int
-    {
-        return (int) DB::table('users')->count();
-    }
+    // public function getTotalUsers(): int
+    // {
+    //     return (int) DB::table('users')->count();
+    // }
 }

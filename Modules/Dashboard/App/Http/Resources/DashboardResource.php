@@ -22,10 +22,10 @@ class DashboardResource extends JsonResource
                 'pending'   => (int) ($this->resource['completed_vs_pending']['pending'] ?? 0),
             ],
             'overdue_tasks' => TaskResource::collection($this->resource['overdue_tasks'] ?? []),
-            'total_user' => (int) ($this->resource['total_user'] ?? 0),
-            'recent_projects' => $this->resource['recent_projects'] ?? [],
-            'upcoming_tasks' => TaskResource::collection($this->resource['upcoming_tasks'] ?? []),
-            'recent_activity' => $this->resource['recent_activity'] ?? [],
+            // 'total_user' => (int) ($this->resource['total_user'] ?? 0),
+            // 'recent_projects' => $this->resource['recent_projects'] ?? [],
+            // 'upcoming_tasks' => TaskResource::collection($this->resource['upcoming_tasks'] ?? []),
+            // 'recent_activity' => $this->resource['recent_activity'] ?? [],
         ];
     }
 }
