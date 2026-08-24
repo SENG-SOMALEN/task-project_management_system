@@ -173,6 +173,12 @@ class DashboardRepository implements DashboardRepositoryInterface
                 '=',
                 'users.user_id'
             )
+            ->leftJoin(
+                'users as assigned_users',
+                'tasks.assigned_to',
+                '=',
+                'assigned_users.user_id'
+            )
             ->orderBy('tasks.created_at', 'desc')
             ->limit(10)
             ->get()
