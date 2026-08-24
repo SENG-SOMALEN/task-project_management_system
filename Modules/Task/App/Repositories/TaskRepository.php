@@ -88,12 +88,6 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function search(string $keyword, ?string $status)
     {
-        return $this->task
-                        ->when($keyword, function ($query) use ($keyword) {
-                            $query->whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($keyword) . '%']);
-                        })
-                        ->when(!is_null($status), function($query) use ($status) {
-                                $query->where('status', $status);
-                        })->get();
+        return $this->task->get();
     }
 }
