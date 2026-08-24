@@ -77,25 +77,6 @@ class DashboardRepository implements DashboardRepositoryInterface
     public function getOverdueTasks(): array
     {
         return DB::table('tasks')
-            ->where('status', '!=', 'Completed')
-            ->whereNotNull('due_date')
-            ->whereDate('due_date', '<', now()->toDateString())
-            ->select([
-                'task_id',
-                'project_id',
-                'assigned_to',
-                'title',
-                'description',
-                'priority',
-                'status',
-                'start_date',
-                'due_date',
-                'create_by',
-                'created_at',
-                'updated_at',
-            ])
-            ->orderBy('due_date', 'asc')
-            ->limit(10)
             ->get()
             ->map(fn ($task) => (array) $task)
             ->toArray();
