@@ -21,6 +21,7 @@ class DashboardController extends Controller
             'overdue_tasks' => $this->dashboardService->getOverdueTasks(),
             'recent_projects' => $this->dashboardService->getRecentProjects(),
             'upcoming_tasks' => $this->dashboardService->getUpcomingTasks(),
+            'recent_activity' => $this->dashboardService->getRecentActivity(),
         ]);
     }
 }
