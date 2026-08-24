@@ -13,9 +13,9 @@ class DashboardController extends Controller
     ) {}
 
     public function index()
-{
-    return response()->json([
-        'message' => 'Dashboard works'
-    ]);
-}
+    {
+        return response()->json([
+            'projects' => $this->dashboardService->getProjectStatistics(),
+        ]);
+    }
 }
