@@ -17,10 +17,10 @@ class DashboardController extends Controller
             'task_statistics'      => $this->dashboardService->getTaskStatistics(),
             'completed_vs_pending' => $this->dashboardService->getCompletedVsPendingTasks(),
             'overdue_tasks'        => $this->dashboardService->getOverdueTasks(),
-            'recent_projects'      => $this->dashboardService->getRecentProjects(),
-            'upcoming_tasks'       => $this->dashboardService->getUpcomingTasks(),
-            'recent_activity'      => $this->dashboardService->getRecentActivity(),
-            'total_user'           => $this->dashboardService->getTotalUsers(),
+            // 'recent_projects'      => $this->dashboardService->getRecentProjects(),
+            // 'upcoming_tasks'       => $this->dashboardService->getUpcomingTasks(),
+            // 'recent_activity'      => $this->dashboardService->getRecentActivity(),
+            // 'total_user'           => $this->dashboardService->getTotalUsers(),
         ];
 
         return new DashboardResource($data);
