@@ -77,6 +77,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     public function getOverdueTasks(): array
     {
         return DB::table('tasks')
+            ->where('status', '!=', 'Completed')
             ->get()
             ->map(fn ($task) => (array) $task)
             ->toArray();
