@@ -21,5 +21,5 @@ interface TaskRepositoryInterface
 
     public function updateStatus(int $id, string $status);
 
-    public function search(string $keyword, string $status);
+    public function search(?string $keyword = null, ?string $status = null);
 }

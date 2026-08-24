@@ -189,7 +189,7 @@ class TaskService
         return $task;
     }
 
-    public function searchTask(string $keyword, string $status)
+    public function searchTask(?string $keyword = null, ?string $status = null)
     {
         return $this->taskRepository->search($keyword, $status);
     }
