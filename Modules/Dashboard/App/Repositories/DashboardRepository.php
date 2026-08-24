@@ -94,6 +94,8 @@ class DashboardRepository implements DashboardRepositoryInterface
                 'created_at',
                 'updated_at',
             ])
+            ->orderBy('due_date', 'asc')
+            ->limit(10)
             ->get()
             ->map(fn ($task) => (array) $task)
             ->toArray();
