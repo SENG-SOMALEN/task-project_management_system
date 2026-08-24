@@ -22,6 +22,7 @@ class DashboardController extends Controller
             'recent_projects' => $this->dashboardService->getRecentProjects(),
             'upcoming_tasks' => $this->dashboardService->getUpcomingTasks(),
             'recent_activity' => $this->dashboardService->getRecentActivity(),
+            'total_user' => $this->dashboardService->getTotalUsers(),
         ]);
     }
 }
