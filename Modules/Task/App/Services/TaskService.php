@@ -44,6 +44,7 @@ class TaskService
         if (!empty($task->assigned_to)) {
             $this->notificationService->createNotification([
                 'user_id' => $task->assigned_to,
+                'task_id' => $task->task_id,
                 'title' => 'New Task Assigned',
                 'message' => "You have been assigned to task: {$task->title}",
                 'is_read' => false,
