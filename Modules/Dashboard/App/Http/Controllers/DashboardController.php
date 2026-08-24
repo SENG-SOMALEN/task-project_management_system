@@ -19,6 +19,7 @@ class DashboardController extends Controller
             'tasks' => $this->dashboardService->getTaskStatistics(),
             'completed_vs_pending' => $this->dashboardService->getCompletedVsPendingTasks(),
             'overdue_tasks' => $this->dashboardService->getOverdueTasks(),
+            'recent_projects' => $this->dashboardService->getRecentProjects(),
         ]);
     }
 }
