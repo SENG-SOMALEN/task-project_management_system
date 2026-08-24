@@ -17,6 +17,7 @@ class DashboardController extends Controller
         return response()->json([
             'projects' => $this->dashboardService->getProjectStatistics(),
             'tasks' => $this->dashboardService->getTaskStatistics(),
+             'completed_vs_pending' => $this->dashboardService->getCompletedVsPendingTasks(),
         ]);
     }
 }
