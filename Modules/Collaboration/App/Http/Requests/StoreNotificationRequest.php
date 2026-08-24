@@ -19,6 +19,11 @@ class StoreNotificationRequest extends FormRequest
                 'integer',
                 'exists:users,user_id',
             ],
+            'task_id' => [
+                'nullable',
+                'integer',
+                'exists:tasks,task_id',
+            ],
             'title' => [
                 'required',
                 'string',
