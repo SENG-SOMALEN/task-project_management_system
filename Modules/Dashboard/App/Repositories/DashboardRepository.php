@@ -167,32 +167,6 @@ class DashboardRepository implements DashboardRepositoryInterface
                 '=',
                 'projects.project_id'
             )
-            ->leftJoin(
-                'users',
-                'tasks.createb_by',
-                '=',
-                'users.user_id'
-            )
-            ->leftJoin(
-                'users as assigned_users',
-                'tasks.assigned_to',
-                '=',
-                'assigned_users.user_id'
-            )
-            ->select([
-                'tasks.task_id',
-                'tasks.title as task_name',
-                'tasks.status',
-                'tasks.priority',
-                'tasks.due_date',
-                'tasks.created_at',
-
-                'projects.project_name',
-
-                'users.username as created_by_username',
-
-                'assigned_users.username as assigned_to_username',
-            ])
             ->orderBy('tasks.created_at', 'desc')
             ->limit(10)
             ->get()
