@@ -80,6 +80,20 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->where('status', '!=', 'Completed')
             ->whereNotNull('due_date')
             ->whereDate('due_date', '<', now()->toDateString())
+            ->select([
+                'task_id',
+                'project_id',
+                'assigned_to',
+                'title',
+                'description',
+                'priority',
+                'status',
+                'start_date',
+                'due_date',
+                'create_by',
+                'created_at',
+                'updated_at',
+            ])
             ->get()
             ->map(fn ($task) => (array) $task)
             ->toArray();
