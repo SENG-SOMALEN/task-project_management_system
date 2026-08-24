@@ -78,6 +78,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         return DB::table('tasks')
             ->where('status', '!=', 'Completed')
+            ->whereNotNull('due_date')
             ->get()
             ->map(fn ($task) => (array) $task)
             ->toArray();
