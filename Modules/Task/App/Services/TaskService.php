@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Modules\Collaboration\App\Services\NotificationService;
 use Modules\Task\App\Interfaces\TaskRepositoryInterface;
 use Modules\TeamMember\App\Interfaces\TeamMemberRepositoryInterface;
+use Illuminate\Validation\ValidationException;
 
 class TaskService
 {
@@ -347,9 +348,11 @@ class TaskService
         );
 
         if (!$isMember) {
-            throw new InvalidArgumentException(
-                'The selected user is not a member of this project team.'
-            );
+            throw ValidationException::withMessages([
+                'user_id' => [
+                    'The selected user is not a member of this project team.'
+                ],
+            ]);
         }
     }
 }
