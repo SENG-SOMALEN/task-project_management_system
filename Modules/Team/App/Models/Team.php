@@ -14,6 +14,7 @@ class Team extends Model
      * The attributes that are mass assignable.
      */
     protected $table = 'teams';
+    protected $primaryKey = 'team_id';
     protected $fillable = [
         'team_name',
         'description',
