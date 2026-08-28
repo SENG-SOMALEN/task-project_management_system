@@ -21,7 +21,7 @@ class StoreTaskRequest extends FormRequest
             ],
 
             'assigned_to' => [
-                'required',
+                'nullable',
                 'integer',
                 'exists:users,user_id',
             ],
