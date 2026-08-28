@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\Team\App\Http\Requests\StoreTeamRequest;
 use Modules\Team\App\Http\Requests\UpdateTeamRequest;
-use Modules\Team\App\Resources\TeamResource;
+use Modules\Team\App\Http\Resources\TeamResource;
 use Modules\Team\App\Services\TeamService;
 
 class TeamController extends Controller
