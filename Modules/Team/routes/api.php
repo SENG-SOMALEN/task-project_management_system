@@ -22,7 +22,7 @@ Route::prefix('v1')
         // ================================================
         // Team Read - All Roles
         // ================================================
-        Route::middleware('role:Admin,ProjectM,TM')->group(function () {
+        Route::middleware('role:Admin,ProjectManager,TeamMember')->group(function () {
             Route::get('teams', [TeamController::class, 'index']);
             Route::get('teams/{id}', [TeamController::class, 'show']);
         });
@@ -30,7 +30,7 @@ Route::prefix('v1')
         // ================================================
         // Team Management - Admin & Project Manager
         // ================================================
-        Route::middleware('role:Admin,ProjectM')->group(function () {
+        Route::middleware('role:Admin,ProjectManager')->group(function () {
             Route::post('teams', [TeamController::class, 'store']);
             Route::put('teams/{id}', [TeamController::class, 'update']);
             Route::delete('teams/{id}', [TeamController::class, 'destroy']);
