@@ -22,4 +22,6 @@ interface TaskRepositoryInterface
     public function updateStatus(int $id, string $status);
 
     public function search(?string $keyword = null, ?string $status = null);
+
+    public function getProjectTeamId(int $projectId);
 }

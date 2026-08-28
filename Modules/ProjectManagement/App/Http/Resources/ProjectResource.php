@@ -22,6 +22,7 @@ class ProjectResource extends JsonResource
             'created_by' => $this->created_by,
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
+            'team_id' => $this->team_id,
         ];
     }
 }

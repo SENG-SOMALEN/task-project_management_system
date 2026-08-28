@@ -4,5 +4,7 @@
     "ProjectManagement": true,
     "Task": true,
     "Collaboration": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Team": true,
+    "TeamMember": true
 }

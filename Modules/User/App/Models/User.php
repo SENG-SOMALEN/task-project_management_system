@@ -5,6 +5,8 @@ namespace Modules\User\App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Team\App\Models\Team;
+use Modules\TeamMember\App\Models\TeamMember;
 
 class User extends Authenticatable
 {
@@ -31,4 +33,25 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function teamMemberships()
+    {
+        return $this->hasMany(
+            TeamMember::class,
+            'user_id',
+            'user_id'
+        );
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(
+            Team::class,
+            'team_members',
+            'user_id',
+            'team_id',
+            'user_id',
+            'team_id'
+        );
+    }
 }

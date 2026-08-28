@@ -17,7 +17,8 @@ class StoreProjectRequest extends FormRequest
             'start_date' => 'required|date',
             'due_date' => 'required|date|after_or_equal:start_date',
             'status' => 'required|in:Planning,In Progress,Completed',
-            'created_by' => 'required|exists:users,user_id'
+            'created_by' => 'required|exists:users,user_id',
+            'team_id'      => 'nullable|exists:teams,team_id',
         ];
     }
 

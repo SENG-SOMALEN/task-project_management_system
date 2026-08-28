@@ -2,6 +2,7 @@
 
 namespace Modules\Task\App\Repositories;
 
+use Modules\ProjectManagement\App\Models\Project;
 use Modules\Task\App\Interfaces\TaskRepositoryInterface;
 use Modules\Task\App\Models\Task;
 
@@ -99,5 +100,13 @@ class TaskRepository implements TaskRepositoryInterface
                 $query->where('status', $status);
             })
             ->get();
+    }
+
+    public function getProjectTeamId(int $projectId)
+    {
+        return Project::where(
+            'project_id',
+            $projectId
+        )->first();
     }
 }

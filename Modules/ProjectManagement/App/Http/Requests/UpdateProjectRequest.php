@@ -51,6 +51,12 @@ class UpdateProjectRequest extends FormRequest
                     'Completed',
                 ]),
             ],
+
+            'team_id' => [
+                'sometimes',
+                'nullable',
+                'exists:teams,team_id',
+            ],
         ];
     }
 }

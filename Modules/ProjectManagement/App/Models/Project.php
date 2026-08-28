@@ -4,6 +4,7 @@ namespace Modules\ProjectManagement\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Team\App\Models\Team;
 use Modules\User\App\Models\User;
 
 class Project extends Model
@@ -17,6 +18,7 @@ class Project extends Model
         'due_date',
         'status',
         'created_by',
+        'team_id'
     ];
 
     protected $casts = [
@@ -29,5 +31,14 @@ class Project extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by', 'user_id');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(
+            Team::class,
+            'team_id',
+            'team_id'
+        );
     }
 }
