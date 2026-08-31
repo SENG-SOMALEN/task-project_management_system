@@ -4,6 +4,8 @@ namespace Modules\Team\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\ProjectManagement\App\Models\Project;
+use Modules\TeamMember\App\Models\TeamMember;
 use Modules\User\App\Models\User;
 
 class Team extends Model
@@ -27,6 +29,24 @@ class Team extends Model
             User::class,
             'created_by',
             'user_id'
+        );
+    }
+
+    public function members()
+    {
+        return $this->hasMany(
+            TeamMember::class,
+            'team_id',
+            'team_id'
+        );
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(
+            Project::class,
+            'team_id',
+            'team_id'
         );
     }
 }

@@ -5,6 +5,7 @@ namespace Modules\User\App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Task\App\Models\Task;
 use Modules\Team\App\Models\Team;
 use Modules\TeamMember\App\Models\TeamMember;
 
@@ -52,6 +53,15 @@ class User extends Authenticatable
             'team_id',
             'user_id',
             'team_id'
+        );
+    }
+
+    public function assignedTasks()
+    {
+        return $this->hasMany(
+            Task::class,
+            'assigned_to',
+            'user_id'
         );
     }
 }

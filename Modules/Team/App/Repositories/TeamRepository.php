@@ -13,13 +13,24 @@ class TeamRepository implements TeamRepositoryInterface
 
     public function all()
     {
-        return $this->team->all();
+        return $this->team
+            ->with([
+                'members.user',
+                'projects.tasks.assignedUser',
+            ])
+            ->get();
     }
 
     public function find(int $id)
     {
-        return $this->team->find($id);
+        return $this->team
+            ->with([
+                'members.user',
+                'projects.tasks.assignedUser',
+            ])
+            ->findOrFail($id);
     }
+
 
     public function create(array $data)
     {

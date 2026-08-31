@@ -4,6 +4,7 @@ namespace Modules\ProjectManagement\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Task\App\Models\Task;
 use Modules\Team\App\Models\Team;
 use Modules\User\App\Models\User;
 
@@ -39,6 +40,15 @@ class Project extends Model
             Team::class,
             'team_id',
             'team_id'
+        );
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(
+            Task::class,
+            'project_id',
+            'project_id'
         );
     }
 }
