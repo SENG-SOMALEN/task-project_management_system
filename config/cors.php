@@ -15,14 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'auth/*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'https://pms-rose-tau.vercel.app',
-        'http://localhost:5173',
-    ],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
